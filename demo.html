@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>访客统计上报 - 本地验证页</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #333; padding: 24px; }
+        h1 { font-size: 22px; margin-bottom: 8px; }
+        p { color: #666; font-size: 14px; margin-bottom: 12px; }
+        button { padding: 10px 18px; border: none; border-radius: 6px; background: #1890ff; color: #fff; font-size: 14px; cursor: pointer; }
+        button:hover { background: #096dd9; }
+        .block { height: 320px; background: #fff; border-radius: 8px; margin: 16px 0; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+        .tip { font-size: 12px; color: #8c8c8c; }
+    </style>
+</head>
+<body>
+    <h1>访客统计上报 - 本地验证页</h1>
+    <p>打开本页会触发 PV；滚动页面后切走 / 关闭会触发停留上报；点击按钮触发自定义事件。</p>
+    <button type="button" onclick="window.Stat.track('demo_click', { from: 'demo.html', ts: Date.now() })">触发自定义事件</button>
+    <p class="tip" style="margin-top: 8px;">当前访客 ID：<span id="vid">-</span></p>
+
+    <div class="block">滚动区块 1（占位内容）</div>
+    <div class="block">滚动区块 2（占位内容）</div>
+    <div class="block">滚动区块 3（占位内容）</div>
+    <div class="block">滚动区块 4（占位内容）</div>
+    <div class="block">滚动区块 5（占位内容）</div>
+
+    <script>
+        window.__STATS_CONFIG = {
+            endpoint: 'http://127.0.0.1:8000/api/logs/visitor.html',
+            debug: true
+        };
+    </script>
+    <script src="statistics.js"></script>
+    <script>
+        document.getElementById('vid').textContent = window.Stat ? window.Stat.getVisitorId() : '脚本未初始化';
+    </script>
+</body>
+</html>

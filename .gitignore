@@ -1,6 +1,2 @@
 # 临时脚本与编译产物
 .tmp_*
-
-# 计划文档与分享包
-.trae/
-.trae-html-share-packages/

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>访客统计上报 - 本地验证页</title>
+    <title>Visitor Tracker - Local Demo</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #333; padding: 24px; }
@@ -16,16 +16,16 @@
     </style>
 </head>
 <body>
-    <h1>访客统计上报 - 本地验证页</h1>
-    <p>打开本页会触发 PV；滚动页面后切走 / 关闭会触发停留上报；点击按钮触发自定义事件。</p>
-    <button type="button" onclick="window.Stat.track('demo_click', { from: 'demo.html', ts: Date.now() })">触发自定义事件</button>
-    <p class="tip" style="margin-top: 8px;">当前访客 ID：<span id="vid">-</span></p>
+    <h1>Visitor Tracker - Local Demo</h1>
+    <p>Opening this page fires a PV; scroll then switch away / close to trigger the stay event; click the button for a custom event.</p>
+    <button type="button" onclick="window.Stat.track('demo_click', { from: 'demo.html', ts: Date.now() })">Fire Custom Event</button>
+    <p class="tip" style="margin-top: 8px;">Visitor ID: <span id="vid">-</span></p>
 
-    <div class="block">滚动区块 1（占位内容）</div>
-    <div class="block">滚动区块 2（占位内容）</div>
-    <div class="block">滚动区块 3（占位内容）</div>
-    <div class="block">滚动区块 4（占位内容）</div>
-    <div class="block">滚动区块 5（占位内容）</div>
+    <div class="block">Scroll block 1 (placeholder)</div>
+    <div class="block">Scroll block 2 (placeholder)</div>
+    <div class="block">Scroll block 3 (placeholder)</div>
+    <div class="block">Scroll block 4 (placeholder)</div>
+    <div class="block">Scroll block 5 (placeholder)</div>
 
     <script>
         window.__STATS_CONFIG = {
@@ -35,7 +35,7 @@
     </script>
     <script src="statistics.js"></script>
     <script>
-        document.getElementById('vid').textContent = window.Stat ? window.Stat.getVisitorId() : '脚本未初始化';
+        document.getElementById('vid').textContent = window.Stat ? window.Stat.getVisitorId() : 'tracker not loaded';
     </script>
 </body>
 </html>

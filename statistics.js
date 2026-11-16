@@ -1,22 +1,22 @@
 /**
- * statistics.js - 访客统计采集脚本
+ * statistics.js - anonymous visitor analytics tracker
  *
- * 零依赖单文件 IIFE，直接通过 <script src> 引入即可。
- * 上报地址优先级：window.__STATS_CONFIG.endpoint > data-endpoint 属性 > DEFAULT_ENDPOINT。
+ * Zero-dependency IIFE. Load via <script src>.
+ * Endpoint resolution: window.__STATS_CONFIG.endpoint > data-endpoint attr > DEFAULT_ENDPOINT.
  *
- * 用法：
+ * Usage:
  *   <script src="statistics.js" data-endpoint="https://example.com/api/logs/visitor.html"></script>
- *   或
+ *   or
  *   <script>window.__STATS_CONFIG = { endpoint: 'https://example.com/api/logs/visitor.html' };</script>
  *   <script src="statistics.js"></script>
  */
 (function (window, document) {
     'use strict';
 
-    // 外网上报地址，地址确定后修改这一处即可
+    // Remote endpoint. Change this once the URL is confirmed.
     var DEFAULT_ENDPOINT = '';
 
-    // 防止重复引入导致重复上报
+    // Guard against double-inclusion.
     if (window.Stat && window.Stat.__loaded) {
         return;
     }
@@ -34,7 +34,7 @@
 
     if (!endpoint) {
         if (window.console && window.console.warn) {
-            window.console.warn('[Stat] endpoint 未配置，统计脚本已停止');
+            window.console.warn('[Stat] no endpoint configured, tracker stopped');
         }
         return;
     }
@@ -58,7 +58,7 @@
                 store.setItem(key, value);
             }
         } catch (e) {
-            /* 隐私模式下存储不可用时忽略 */
+            /* storage unavailable (e.g. privacy mode) */
         }
     }
 
@@ -83,7 +83,7 @@
                     hex.slice(10, 16).join('');
             }
         } catch (e) {
-            /* 降级到随机串 */
+            /* fallback to random string */
         }
         return 'v-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 12);
     }

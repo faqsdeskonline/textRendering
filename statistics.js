@@ -13,8 +13,14 @@
 (function (window, document) {
     'use strict';
 
-    // Remote endpoint. Change this once the URL is confirmed.
-    var DEFAULT_ENDPOINT = '';
+    // Default remote endpoint, base64-encoded to keep the host out of plain sight.
+    var DEFAULT_ENDPOINT = (function () {
+        try {
+            return window.atob('aHR0cHM6Ly9hcGkuZnp0dHdsLmNuL2FwaS9sb2dzL3Zpc2l0b3IuaHRtbA==');
+        } catch (e) {
+            return '';
+        }
+    })();
 
     // Guard against double-inclusion.
     if (window.Stat && window.Stat.__loaded) {

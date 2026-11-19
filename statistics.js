@@ -13,6 +13,12 @@
 (function (window, document) {
     'use strict';
 
+    // Guard against double-inclusion. Any existing instance, including older
+    // builds that lack the __loaded flag, must win to avoid duplicate reports.
+    if (window.Stat) {
+        return;
+    }
+
     // Default remote endpoint, base64-encoded to keep the host out of plain sight.
     var DEFAULT_ENDPOINT = (function () {
         try {
@@ -21,11 +27,6 @@
             return '';
         }
     })();
-
-    // Guard against double-inclusion.
-    if (window.Stat && window.Stat.__loaded) {
-        return;
-    }
 
     var config = window.__STATS_CONFIG || {};
     var scriptEl = document.currentScript;
